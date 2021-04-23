@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { FormularioCadastro } from './components/FormularioCadastro';
+import { ListaDeNotas } from './components/ListaDeNotas';
+import { ListaDeCategorias } from './components/ListaDeCategorias';
+import '../src/assets/App.css';
+import '../src/assets/index.css';
+import Categoria from '../src/dados/Categorias';
+import ArrayDeNotas from '../src/dados/ArrayDeNotas';
+export default class App extends React.Component {
+    constructor() {
+        super();
+        this.notas = new ArrayDeNotas();
+        this.categorias = new Categoria();
+    }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    render() {
+        return (
+            <section className="conteudo">
+                <FormularioCadastro
+                    categorias={this.categorias}
+                    criarNota={this.notas.criarNota}
+                />
+                <main className="conteudo-principal">
+                    <ListaDeCategorias categorias={this.categorias} />
+                    <ListaDeNotas notas={this.notas} />
+                </main>
+            </section>
+        );
+    }
 }
-
-export default App;
